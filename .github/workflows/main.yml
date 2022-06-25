@@ -64,6 +64,8 @@ jobs:
     name: Generate a new release
     needs: deploy
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.release.outputs.version }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -72,6 +74,37 @@ jobs:
         with:
           node-version: 16
       - name: semantic release
-        run: npx semantic-release
+        id: release
+        run: |
+          npm i -D @semantic-release/exec
+          npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-docs:
+    name: Publish docs
+    runs-on: ubuntu-latest
+    needs: release
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: '24.2'
+          elixir-version: '1.13.4'
+      - name: Restore dependencies cache
+        uses: actions/cache@v2
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-
+      - name: Install dependencies
+        run: mix deps.get
+      - name: Update version
+        run: mix run bump.exs ${{ needs.release.outputs.version }}
+      - name: Generate docs
+        run: mix docs
+      - uses: JamesIves/github-pages-deploy-action@v4.3.0
+        with:
+          branch: gh-pages
+          folder: doc

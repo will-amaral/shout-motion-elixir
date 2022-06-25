@@ -3,6 +3,7 @@ defmodule ShoutMotion.MixProject do
 
   def project do
     [
+      name: "ShoutMotion",
       app: :shout_motion,
       version: "0.1.0",
       elixir: "~> 1.12",
@@ -17,6 +18,12 @@ defmodule ShoutMotion.MixProject do
         "coveralls.detail": :test,
         "coveralls.post": :test,
         "coveralls.html": :test
+      ],
+      docs: [
+        main: "main",
+        logo: "assets/images/logo.png",
+        extras: ["README.md": [filename: "main", title: "Main"]],
+        formatters: ["html"]
       ]
     ]
   end
@@ -57,7 +64,8 @@ defmodule ShoutMotion.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:excoveralls, "~> 0.10", only: :test}
+      {:excoveralls, "~> 0.10", only: :test},
+      {:ex_doc, "~> 0.27", only: :dev, runtime: false}
     ]
   end
 
