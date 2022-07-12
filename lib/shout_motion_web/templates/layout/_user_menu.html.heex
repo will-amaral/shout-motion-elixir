@@ -7,9 +7,11 @@
         </strong>
       </summary>
       <ul role="listbox">
-        <li><%= link("Settings", to: Routes.user_settings_path(@conn, :edit)) %></li>
+        <li><%= link("Página Inicial", to: Routes.page_path(@conn, :index)) %></li>
+        <li><%= link("Configurações", to: Routes.user_settings_path(@conn, :edit)) %></li>
+        <li><a href="https://will-amaral.github.io/shout-motion" target="_blank">Ajuda</a></li>
         <li>
-          <%= link("Log out", to: Routes.user_session_path(@conn, :delete), method: :delete) %>
+          <%= link("Sair", to: Routes.user_session_path(@conn, :delete), method: :delete) %>
         </li>
       </ul>
     </details>

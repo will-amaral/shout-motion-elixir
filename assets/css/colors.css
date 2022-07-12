@@ -1,0 +1,50 @@
+[data-theme='light'],
+:root:not([data-theme='dark']) {
+  --primary: #00da9c;
+  --primary-hover: #2ef6bd;
+  --primary-focus: rgba(0, 218, 156, 0.125);
+  --primary-inverse: #000;
+  --secondary: #f46b45;
+  --secondary-hover: #f8a75c;
+  --secondary-focus: rgba(244, 105, 67, 0.125);
+  --secondary-inverse: #000;
+}
+
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --primary: #00da9c;
+    --primary-hover: #2ef6bd;
+    --primary-focus: rgba(0, 218, 156, 0.25);
+    --primary-inverse: #000;
+    --secondary: #f46b45;
+    --secondary-hover: #f8a75c;
+    --secondary-focus: rgba(244, 105, 67, 0.25);
+    --secondary-inverse: #000;
+  }
+}
+
+[data-theme='dark'] {
+  --primary: #00da9c;
+  --primary-hover: #2ef6bd;
+  --primary-focus: rgba(0, 218, 156, 0.25);
+  --primary-inverse: #000;
+  --secondary: #f46b45;
+  --secondary-hover: #f8a75c;
+  --secondary-focus: rgba(244, 105, 67, 0.25);
+  --secondary-inverse: #000;
+}
+
+:root {
+  --nav-border-color: rgba(115, 130, 140, 0.2);
+  --form-element-active-border-color: var(--primary);
+  --form-element-focus-color: var(--primary-focus);
+  --switch-color: var(--primary-inverse);
+  --switch-checked-background-color: var(--primary);
+  --error: #f44336;
+  --error-hover: #f58178;
+  --error-focus: rgba(244, 67, 54, 0.25);
+  --error-inverse: #fff;
+  --alert-border-color: var(--primary);
+  --alert-background-color: var(--primary-focus);
+  --alert-text-color: #fff;
+}

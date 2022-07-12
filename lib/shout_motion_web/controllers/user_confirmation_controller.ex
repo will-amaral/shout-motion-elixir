@@ -18,8 +18,8 @@ defmodule ShoutMotionWeb.UserConfirmationController do
     conn
     |> put_flash(
       :info,
-      "If your email is in our system and it has not been confirmed yet, " <>
-        "you will receive an email with instructions shortly."
+      "Se seu email está em nosso sistema e ainda não foi confirmado, " <>
+        "você receberá instruções para confirmação em breve"
     )
     |> redirect(to: "/")
   end
@@ -34,7 +34,7 @@ defmodule ShoutMotionWeb.UserConfirmationController do
     case Accounts.confirm_user(token) do
       {:ok, _} ->
         conn
-        |> put_flash(:info, "User confirmed successfully.")
+        |> put_flash(:info, "Usuário confirmado com sucesso.")
         |> redirect(to: "/")
 
       :error ->
@@ -48,7 +48,7 @@ defmodule ShoutMotionWeb.UserConfirmationController do
 
           %{} ->
             conn
-            |> put_flash(:error, "User confirmation link is invalid or it has expired.")
+            |> put_flash(:error, "Link de confirmação é inválido ou expirou.")
             |> redirect(to: "/")
         end
     end

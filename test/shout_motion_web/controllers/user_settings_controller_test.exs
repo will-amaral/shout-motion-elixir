@@ -6,11 +6,11 @@ defmodule ShoutMotionWeb.UserSettingsControllerTest do
 
   setup :register_and_log_in_user
 
-  describe "GET /users/settings" do
+  describe "GET /configuracoes" do
     test "renders settings page", %{conn: conn} do
       conn = get(conn, Routes.user_settings_path(conn, :edit))
       response = html_response(conn, 200)
-      assert response =~ "<h1>Settings</h1>"
+      assert response =~ "<h1>Configurações</h1>"
     end
 
     test "redirects if user is not logged in" do
@@ -34,7 +34,7 @@ defmodule ShoutMotionWeb.UserSettingsControllerTest do
 
       assert redirected_to(new_password_conn) == Routes.user_settings_path(conn, :edit)
       assert get_session(new_password_conn, :user_token) != get_session(conn, :user_token)
-      assert get_flash(new_password_conn, :info) =~ "Password updated successfully"
+      assert get_flash(new_password_conn, :info) =~ "Senha atualizada com sucesso"
       assert Accounts.get_user_by_email_and_password(user.email, "new valid password")
     end
 
@@ -50,7 +50,7 @@ defmodule ShoutMotionWeb.UserSettingsControllerTest do
         })
 
       response = html_response(old_password_conn, 200)
-      assert response =~ "<h1>Settings</h1>"
+      assert response =~ "<h1>Configurações</h1>"
       assert response =~ "should be at least 6 character(s)"
       assert response =~ "does not match password"
       assert response =~ "is not valid"
@@ -70,7 +70,7 @@ defmodule ShoutMotionWeb.UserSettingsControllerTest do
         })
 
       assert redirected_to(conn) == Routes.user_settings_path(conn, :edit)
-      assert get_flash(conn, :info) =~ "A link to confirm your email"
+      assert get_flash(conn, :info) =~ "Um link para confirmar o seu email"
       assert Accounts.get_user_by_email(user.email)
     end
 
@@ -83,7 +83,7 @@ defmodule ShoutMotionWeb.UserSettingsControllerTest do
         })
 
       response = html_response(conn, 200)
-      assert response =~ "<h1>Settings</h1>"
+      assert response =~ "<h1>Configurações</h1>"
       assert response =~ "must have the @ sign and no spaces"
       assert response =~ "is not valid"
     end
@@ -104,19 +104,19 @@ defmodule ShoutMotionWeb.UserSettingsControllerTest do
     test "updates the user email once", %{conn: conn, user: user, token: token, email: email} do
       conn = get(conn, Routes.user_settings_path(conn, :confirm_email, token))
       assert redirected_to(conn) == Routes.user_settings_path(conn, :edit)
-      assert get_flash(conn, :info) =~ "Email changed successfully"
+      assert get_flash(conn, :info) =~ "Email atualizado com sucesso"
       refute Accounts.get_user_by_email(user.email)
       assert Accounts.get_user_by_email(email)
 
       conn = get(conn, Routes.user_settings_path(conn, :confirm_email, token))
       assert redirected_to(conn) == Routes.user_settings_path(conn, :edit)
-      assert get_flash(conn, :error) =~ "Email change link is invalid or it has expired"
+      assert get_flash(conn, :error) =~ "Link para atualizar o seu email é inválido ou expirou"
     end
 
     test "does not update email with invalid token", %{conn: conn, user: user} do
       conn = get(conn, Routes.user_settings_path(conn, :confirm_email, "oops"))
       assert redirected_to(conn) == Routes.user_settings_path(conn, :edit)
-      assert get_flash(conn, :error) =~ "Email change link is invalid or it has expired"
+      assert get_flash(conn, :error) =~ "Link para atualizar o seu email é inválido ou expirou"
       assert Accounts.get_user_by_email(user.email)
     end
 
