@@ -3,13 +3,13 @@ defmodule ShoutMotionWeb.UserRegistrationControllerTest do
 
   import ShoutMotion.AccountsFixtures
 
-  describe "GET /users/register" do
+  describe "GET /criar-conta" do
     test "renders registration page", %{conn: conn} do
       conn = get(conn, Routes.user_registration_path(conn, :new))
       response = html_response(conn, 200)
       assert response =~ "<h1>Register</h1>"
       assert response =~ "Log in</a>"
-      assert response =~ "Register</a>"
+      assert response =~ "Forgot your password?</a>"
     end
 
     test "redirects if already logged in", %{conn: conn} do
@@ -18,7 +18,7 @@ defmodule ShoutMotionWeb.UserRegistrationControllerTest do
     end
   end
 
-  describe "POST /users/register" do
+  describe "POST /criar-conta" do
     @tag :capture_log
     test "creates account and logs the user in", %{conn: conn} do
       email = unique_user_email()
