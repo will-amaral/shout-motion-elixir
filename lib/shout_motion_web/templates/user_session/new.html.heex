@@ -5,11 +5,6 @@
       <h2>Entre na sua conta</h2>
     </hgroup>
     <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
-      <%= if @error_message do %>
-        <div class="alert alert-danger">
-          <p><%= @error_message %></p>
-        </div>
-      <% end %>
       <%= email_input(f, :email, required: true, placeholder: "Email", aria: [label: "Email"]) %>
       <%= password_input(f, :password,
         required: true,
@@ -22,6 +17,12 @@
           <%= checkbox(f, :remember_me, role: "switch") %> Lembrar de mim
         </label>
       </fieldset>
+
+      <%= if @error_message do %>
+        <article role="alert" class="error">
+          <%= @error_message %>
+        </article>
+      <% end %>
 
       <%= submit("Entrar", class: "contrast") %>
     </.form>
