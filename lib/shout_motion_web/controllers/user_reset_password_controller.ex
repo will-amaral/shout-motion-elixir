@@ -20,7 +20,7 @@ defmodule ShoutMotionWeb.UserResetPasswordController do
     conn
     |> put_flash(
       :info,
-      "If your email is in our system, you will receive instructions to reset your password shortly."
+      "Se seu email está em nosso sistema, você receberá instruções para resetar sua senha em breve"
     )
     |> redirect(to: "/")
   end
@@ -35,7 +35,7 @@ defmodule ShoutMotionWeb.UserResetPasswordController do
     case Accounts.reset_user_password(conn.assigns.user, user_params) do
       {:ok, _} ->
         conn
-        |> put_flash(:info, "Password reset successfully.")
+        |> put_flash(:info, "Senha atualizada com sucesso.")
         |> redirect(to: Routes.user_session_path(conn, :new))
 
       {:error, changeset} ->
@@ -50,7 +50,7 @@ defmodule ShoutMotionWeb.UserResetPasswordController do
       conn |> assign(:user, user) |> assign(:token, token)
     else
       conn
-      |> put_flash(:error, "Reset password link is invalid or it has expired.")
+      |> put_flash(:error, "Link para resetar sua senha é inválido ou expirou.")
       |> redirect(to: "/")
       |> halt()
     end

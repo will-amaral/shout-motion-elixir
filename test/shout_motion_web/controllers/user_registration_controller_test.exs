@@ -7,9 +7,9 @@ defmodule ShoutMotionWeb.UserRegistrationControllerTest do
     test "renders registration page", %{conn: conn} do
       conn = get(conn, Routes.user_registration_path(conn, :new))
       response = html_response(conn, 200)
-      assert response =~ "<h1>Register</h1>"
-      assert response =~ "Log in</a>"
-      assert response =~ "Forgot your password?</a>"
+      assert response =~ "<h1>Criar conta</h1>"
+      assert response =~ "Login</a>"
+      assert response =~ "Esqueceu sua senha?</a>"
     end
 
     test "redirects if already logged in", %{conn: conn} do
@@ -35,8 +35,8 @@ defmodule ShoutMotionWeb.UserRegistrationControllerTest do
       conn = get(conn, "/")
       response = html_response(conn, 200)
       assert response =~ email
-      assert response =~ "Settings</a>"
-      assert response =~ "Log out</a>"
+      assert response =~ "Configurações</a>"
+      assert response =~ "Sair</a>"
     end
 
     test "render errors for invalid data", %{conn: conn} do
@@ -46,7 +46,7 @@ defmodule ShoutMotionWeb.UserRegistrationControllerTest do
         })
 
       response = html_response(conn, 200)
-      assert response =~ "<h1>Register</h1>"
+      assert response =~ "<h1>Criar conta</h1>"
       assert response =~ "must have the @ sign and no spaces"
       assert response =~ "should be at least 6 character"
     end

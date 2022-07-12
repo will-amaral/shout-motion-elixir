@@ -36,8 +36,8 @@ defmodule ShoutMotionWeb.UserSessionControllerTest do
       conn = get(conn, "/")
       response = html_response(conn, 200)
       assert response =~ user.email
-      assert response =~ "Settings</a>"
-      assert response =~ "Log out</a>"
+      assert response =~ "Configurações</a>"
+      assert response =~ "Sair</a>"
     end
 
     test "logs the user in with remember me", %{conn: conn, user: user} do
@@ -76,7 +76,7 @@ defmodule ShoutMotionWeb.UserSessionControllerTest do
 
       response = html_response(conn, 200)
       assert response =~ "<h1>Login</h1>"
-      assert response =~ "Invalid email or password"
+      assert response =~ "Email ou senha inválido"
     end
   end
 
@@ -85,14 +85,14 @@ defmodule ShoutMotionWeb.UserSessionControllerTest do
       conn = conn |> log_in_user(user) |> delete(Routes.user_session_path(conn, :delete))
       assert redirected_to(conn) == "/login"
       refute get_session(conn, :user_token)
-      assert get_flash(conn, :info) =~ "Logged out successfully"
+      assert get_flash(conn, :info) =~ "Sessão encerrada com sucesso"
     end
 
     test "succeeds even if the user is not logged in", %{conn: conn} do
       conn = delete(conn, Routes.user_session_path(conn, :delete))
       assert redirected_to(conn) == "/login"
       refute get_session(conn, :user_token)
-      assert get_flash(conn, :info) =~ "Logged out successfully"
+      assert get_flash(conn, :info) =~ "Sessão encerrada com sucesso"
     end
   end
 end

@@ -25,7 +25,7 @@ defmodule ShoutMotionWeb.UserSettingsController do
         conn
         |> put_flash(
           :info,
-          "A link to confirm your email change has been sent to the new address."
+          "Um link para confirmar o seu email novo foi enviado."
         )
         |> redirect(to: Routes.user_settings_path(conn, :edit))
 
@@ -41,7 +41,7 @@ defmodule ShoutMotionWeb.UserSettingsController do
     case Accounts.update_user_password(user, password, user_params) do
       {:ok, user} ->
         conn
-        |> put_flash(:info, "Password updated successfully.")
+        |> put_flash(:info, "Senha atualizada com sucesso.")
         |> put_session(:user_return_to, Routes.user_settings_path(conn, :edit))
         |> UserAuth.log_in_user(user)
 
@@ -54,12 +54,12 @@ defmodule ShoutMotionWeb.UserSettingsController do
     case Accounts.update_user_email(conn.assigns.current_user, token) do
       :ok ->
         conn
-        |> put_flash(:info, "Email changed successfully.")
+        |> put_flash(:info, "Email atualizado com sucesso.")
         |> redirect(to: Routes.user_settings_path(conn, :edit))
 
       :error ->
         conn
-        |> put_flash(:error, "Email change link is invalid or it has expired.")
+        |> put_flash(:error, "Link para atualizar o seu email é inválido ou expirou.")
         |> redirect(to: Routes.user_settings_path(conn, :edit))
     end
   end

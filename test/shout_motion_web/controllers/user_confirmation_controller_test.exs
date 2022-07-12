@@ -13,7 +13,7 @@ defmodule ShoutMotionWeb.UserConfirmationControllerTest do
     test "renders the resend confirmation page", %{conn: conn} do
       conn = get(conn, Routes.user_confirmation_path(conn, :new))
       response = html_response(conn, 200)
-      assert response =~ "<h1>Resend confirmation instructions</h1>"
+      assert response =~ "<h1>Reenviar instruções de confirmação</h1>"
     end
   end
 
@@ -26,7 +26,7 @@ defmodule ShoutMotionWeb.UserConfirmationControllerTest do
         })
 
       assert redirected_to(conn) == "/"
-      assert get_flash(conn, :info) =~ "If your email is in our system"
+      assert get_flash(conn, :info) =~ "Se seu email está em nosso sistema"
       assert Repo.get_by!(Accounts.UserToken, user_id: user.id).context == "confirm"
     end
 
@@ -39,7 +39,7 @@ defmodule ShoutMotionWeb.UserConfirmationControllerTest do
         })
 
       assert redirected_to(conn) == "/"
-      assert get_flash(conn, :info) =~ "If your email is in our system"
+      assert get_flash(conn, :info) =~ "Se seu email está em nosso sistema"
       refute Repo.get_by(Accounts.UserToken, user_id: user.id)
     end
 
@@ -50,7 +50,7 @@ defmodule ShoutMotionWeb.UserConfirmationControllerTest do
         })
 
       assert redirected_to(conn) == "/"
-      assert get_flash(conn, :info) =~ "If your email is in our system"
+      assert get_flash(conn, :info) =~ "Se seu email está em nosso sistema"
       assert Repo.all(Accounts.UserToken) == []
     end
   end
@@ -59,7 +59,7 @@ defmodule ShoutMotionWeb.UserConfirmationControllerTest do
     test "renders the confirmation page", %{conn: conn} do
       conn = get(conn, Routes.user_confirmation_path(conn, :edit, "some-token"))
       response = html_response(conn, 200)
-      assert response =~ "<h1>Confirm account</h1>"
+      assert response =~ "<h1>Confirmar conta</h1>"
 
       form_action = Routes.user_confirmation_path(conn, :update, "some-token")
       assert response =~ "action=\"#{form_action}\""
@@ -75,7 +75,7 @@ defmodule ShoutMotionWeb.UserConfirmationControllerTest do
 
       conn = post(conn, Routes.user_confirmation_path(conn, :update, token))
       assert redirected_to(conn) == "/"
-      assert get_flash(conn, :info) =~ "User confirmed successfully"
+      assert get_flash(conn, :info) =~ "Usuário confirmado com sucesso"
       assert Accounts.get_user!(user.id).confirmed_at
       refute get_session(conn, :user_token)
       assert Repo.all(Accounts.UserToken) == []
@@ -83,7 +83,7 @@ defmodule ShoutMotionWeb.UserConfirmationControllerTest do
       # When not logged in
       conn = post(conn, Routes.user_confirmation_path(conn, :update, token))
       assert redirected_to(conn) == "/"
-      assert get_flash(conn, :error) =~ "User confirmation link is invalid or it has expired"
+      assert get_flash(conn, :error) =~ "Link de confirmação é inválido ou expirou"
 
       # When logged in
       conn =
@@ -98,7 +98,7 @@ defmodule ShoutMotionWeb.UserConfirmationControllerTest do
     test "does not confirm email with invalid token", %{conn: conn, user: user} do
       conn = post(conn, Routes.user_confirmation_path(conn, :update, "oops"))
       assert redirected_to(conn) == "/"
-      assert get_flash(conn, :error) =~ "User confirmation link is invalid or it has expired"
+      assert get_flash(conn, :error) =~ "Link de confirmação é inválido ou expirou"
       refute Accounts.get_user!(user.id).confirmed_at
     end
   end
