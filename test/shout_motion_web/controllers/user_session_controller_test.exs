@@ -7,13 +7,13 @@ defmodule ShoutMotionWeb.UserSessionControllerTest do
     %{user: user_fixture()}
   end
 
-  describe "GET /users/log_in" do
+  describe "GET /login" do
     test "renders log in page", %{conn: conn} do
       conn = get(conn, Routes.user_session_path(conn, :new))
       response = html_response(conn, 200)
-      assert response =~ "<h1>Log in</h1>"
-      assert response =~ "Register</a>"
-      assert response =~ "Forgot your password?</a>"
+      assert response =~ "<h1>Login</h1>"
+      assert response =~ "Criar conta</a>"
+      assert response =~ "Esqueceu a sua senha?</a>"
     end
 
     test "redirects if already logged in", %{conn: conn, user: user} do
@@ -22,7 +22,7 @@ defmodule ShoutMotionWeb.UserSessionControllerTest do
     end
   end
 
-  describe "POST /users/log_in" do
+  describe "POST /login" do
     test "logs the user in", %{conn: conn, user: user} do
       conn =
         post(conn, Routes.user_session_path(conn, :create), %{
@@ -75,7 +75,7 @@ defmodule ShoutMotionWeb.UserSessionControllerTest do
         })
 
       response = html_response(conn, 200)
-      assert response =~ "<h1>Log in</h1>"
+      assert response =~ "<h1>Login</h1>"
       assert response =~ "Invalid email or password"
     end
   end
@@ -83,14 +83,14 @@ defmodule ShoutMotionWeb.UserSessionControllerTest do
   describe "DELETE /users/log_out" do
     test "logs the user out", %{conn: conn, user: user} do
       conn = conn |> log_in_user(user) |> delete(Routes.user_session_path(conn, :delete))
-      assert redirected_to(conn) == "/"
+      assert redirected_to(conn) == "/login"
       refute get_session(conn, :user_token)
       assert get_flash(conn, :info) =~ "Logged out successfully"
     end
 
     test "succeeds even if the user is not logged in", %{conn: conn} do
       conn = delete(conn, Routes.user_session_path(conn, :delete))
-      assert redirected_to(conn) == "/"
+      assert redirected_to(conn) == "/login"
       refute get_session(conn, :user_token)
       assert get_flash(conn, :info) =~ "Logged out successfully"
     end

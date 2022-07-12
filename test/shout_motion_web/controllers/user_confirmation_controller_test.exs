@@ -9,7 +9,7 @@ defmodule ShoutMotionWeb.UserConfirmationControllerTest do
     %{user: user_fixture()}
   end
 
-  describe "GET /users/confirm" do
+  describe "GET /confirmar" do
     test "renders the resend confirmation page", %{conn: conn} do
       conn = get(conn, Routes.user_confirmation_path(conn, :new))
       response = html_response(conn, 200)
@@ -17,7 +17,7 @@ defmodule ShoutMotionWeb.UserConfirmationControllerTest do
     end
   end
 
-  describe "POST /users/confirm" do
+  describe "POST /confirmar" do
     @tag :capture_log
     test "sends a new confirmation token", %{conn: conn, user: user} do
       conn =
@@ -55,7 +55,7 @@ defmodule ShoutMotionWeb.UserConfirmationControllerTest do
     end
   end
 
-  describe "GET /users/confirm/:token" do
+  describe "GET /confirmar/:token" do
     test "renders the confirmation page", %{conn: conn} do
       conn = get(conn, Routes.user_confirmation_path(conn, :edit, "some-token"))
       response = html_response(conn, 200)
@@ -66,7 +66,7 @@ defmodule ShoutMotionWeb.UserConfirmationControllerTest do
     end
   end
 
-  describe "POST /users/confirm/:token" do
+  describe "POST /confirmar/:token" do
     test "confirms the given token once", %{conn: conn, user: user} do
       token =
         extract_user_token(fn url ->
