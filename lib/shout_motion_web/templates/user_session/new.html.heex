@@ -1,35 +1,40 @@
-<header class="grid-container full">
-  <h1>Login</h1>
-</header>
+<article class="grid">
+  <div>
+    <hgroup>
+      <h1>Login</h1>
+      <h2>Entre na sua conta</h2>
+    </hgroup>
+    <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
+      <%= if @error_message do %>
+        <div class="alert alert-danger">
+          <p><%= @error_message %></p>
+        </div>
+      <% end %>
+      <%= email_input(f, :email, required: true, placeholder: "Email", aria: [label: "Email"]) %>
+      <%= password_input(f, :password,
+        required: true,
+        placeholder: "Senha",
+        aria: [label: "Senha"]
+      ) %>
 
-<section class="grid-container full">
-  <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
-    <%= if @error_message do %>
-      <div class="alert alert-danger">
-        <p><%= @error_message %></p>
-      </div>
-    <% end %>
+      <fieldset>
+        <label>
+          <%= checkbox(f, :remember_me, role: "switch") %> Lembrar de mim
+        </label>
+      </fieldset>
 
-    <%= label(f, :email) %>
-    <%= email_input(f, :email, required: true) %>
-
-    <%= label(f, :password) %>
-    <%= password_input(f, :password, required: true) %>
-
-    <div class="form-group">
-      <%= label(f, :remember_me, "Lembrar de mim") %>
-      <%= checkbox(f, :remember_me) %>
-    </div>
-
-    <div>
-      <%= submit("Entrar") %>
-    </div>
-  </.form>
-
-  <p>
-    <%= link("Criar conta", to: Routes.user_registration_path(@conn, :new)) %> | <%= link(
-      "Esqueceu a sua senha?",
-      to: Routes.user_reset_password_path(@conn, :new)
-    ) %>
-  </p>
-</section>
+      <%= submit("Entrar", class: "contrast") %>
+    </.form>
+    <nav>
+      <ul>
+        <li>
+          <%= link("Criar conta", to: Routes.user_registration_path(@conn, :new)) %>
+        </li>
+        <li>
+          <%= link("Esqueceu a sua senha?", to: Routes.user_reset_password_path(@conn, :new)) %>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div></div>
+</article>
