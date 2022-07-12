@@ -1,0 +1,17 @@
+<%= if @current_user do %>
+  <li>
+    <details role="list" dir="rtl">
+      <summary aria-haspopup="listbox" role="link" class="contrast">
+        <strong>
+          <%= @current_user.email %>
+        </strong>
+      </summary>
+      <ul role="listbox">
+        <li><%= link("Settings", to: Routes.user_settings_path(@conn, :edit)) %></li>
+        <li>
+          <%= link("Log out", to: Routes.user_session_path(@conn, :delete), method: :delete) %>
+        </li>
+      </ul>
+    </details>
+  </li>
+<% end %>

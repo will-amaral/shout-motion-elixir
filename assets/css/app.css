@@ -1,6 +1,6 @@
 @import './reset.css';
-@import './root.css';
-@import './colors.css';
+@import './pico.min.css';
+@import './layout.css';
 
 .live-dashboard {
   position: absolute;
