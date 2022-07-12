@@ -21,14 +21,6 @@
 
 <main class="container">
   <%= @inner_content %>
-  <aside class="alert" role="alert">
-    <p class="alert-info"><%= get_flash(@conn, :info) %></p>
-    <p class="alert-danger"><%= get_flash(@conn, :error) %></p>
-  </aside>
+  <article role="alert"><%= get_flash(@conn, :info) %></article>
+  <article role="alert" class="error"><%= get_flash(@conn, :error) %></article>
 </main>
-
-<footer class="container-fluid">
-  <small>
-    ShoutMotion 2022
-  </small>
-</footer>
