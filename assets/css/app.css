@@ -2,40 +2,58 @@
 @import './pico.min.css';
 @import './layout.css';
 
-.live-dashboard {
-  position: absolute;
-  right: 0;
-  padding: 10px;
+[data-theme='light'],
+:root:not([data-theme='dark']) {
+  --primary: #00da9c;
+  --primary-hover: #2ef6bd;
+  --primary-focus: rgba(0, 218, 156, 0.125);
+  --primary-inverse: #fff;
 }
 
-.alert {
-  --alert-color: var(--info-darker);
-  background-color: var(--alert-color);
-  color: var(--alert-color);
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --primary: #00da9c;
+    --primary-hover: #2ef6bd;
+    --primary-focus: rgba(0, 218, 156, 0.25);
+    --primary-inverse: #fff;
+  }
 }
 
-.alert > p:empty {
+[data-theme='dark'] {
+  --primary: #00da9c;
+  --primary-hover: #2ef6bd;
+  --primary-focus: rgba(0, 218, 156, 0.25);
+  --primary-inverse: #fff;
+}
+
+:root {
+  --nav-border-color: rgba(115, 130, 140, 0.2);
+  --form-element-active-border-color: var(--primary);
+  --form-element-focus-color: var(--primary-focus);
+  --switch-color: var(--primary-inverse);
+  --switch-checked-background-color: var(--primary);
+  --error: #f44336;
+  --error-hover: #f58178;
+  --error-focus: rgba(244, 67, 54, 0.25);
+  --error-inverse: #fff;
+}
+
+[role='alert'] {
+  --alert-border-color: var(--primary);
+  --alert-background-color: var(--primary-focus);
+  --alert-text-color: var(--primary-inverse);
+  border-left: 5px solid var(--alert-border-color);
+  background-color: var(--alert-background-color);
+  color: var(--alert-text-color);
+  margin: 1rem 0;
+}
+
+[role='alert'].error {
+  --alert-border-color: var(--error);
+  --alert-background-color: var(--error-focus);
+  --alert-text-color: var(--error-inverse);
+}
+
+[role='alert']:empty {
   display: none;
-}
-
-.alert > p:not(:empty) {
-  filter: brightness(0.5);
-  padding: 2rem;
-  font-weight: 600;
-}
-
-.alert-info {
-  --alert-color: var(--info-darker);
-}
-
-.alert-success {
-  --alert-color: var(--success-darker);
-}
-
-.alert-error {
-  --alert-color: var(--danger-darker);
-}
-
-.alert-warning {
-  --alert-color: var(--warning-darker);
 }
