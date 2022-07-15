@@ -146,4 +146,23 @@ defmodule ShoutMotionWeb.UserAuth do
   defp maybe_store_return_to(conn), do: conn
 
   defp signed_in_path(_conn), do: "/"
+
+  def require_student_role(conn, _opts), do: require_permissons(conn, :student)
+  def require_instructor_role(conn, _opts), do: require_permissons(conn, :instructor)
+  def require_admin_role(conn, _opts), do: require_permissons(conn, :admin)
+  def require_superadmin_role(conn, _opts), do: require_permissons(conn, :superadmin)
+
+  defp require_permissons(conn, role) do
+    user = conn.assigns[:current_user]
+
+    if user.role == role do
+      conn
+    else
+      conn
+      |> put_flash(:error, "Você não tem permissões suficientes para acessar essa página.")
+      |> maybe_store_return_to()
+      |> redirect(to: Routes.page_path(conn, :index))
+      |> halt()
+    end
+  end
 end

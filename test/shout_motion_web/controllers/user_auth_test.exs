@@ -167,4 +167,102 @@ defmodule ShoutMotionWeb.UserAuthTest do
       refute conn.status
     end
   end
+
+  describe "require_student_role/2" do
+    test "redirects if user is not student", %{conn: conn, user: user} do
+      conn =
+        conn
+        |> assign(:current_user, %{user | role: :instructor})
+        |> fetch_flash()
+        |> UserAuth.require_student_role([])
+
+      assert conn.halted
+      assert redirected_to(conn) == Routes.page_path(conn, :index)
+
+      assert get_flash(conn, :error) ==
+               "Você não tem permissões suficientes para acessar essa página."
+    end
+
+    test "does not redirect is user is student", %{conn: conn, user: user} do
+      conn = conn |> assign(:current_user, user) |> UserAuth.require_student_role([])
+      refute conn.halted
+      refute conn.status
+    end
+  end
+
+  describe "require_instructor_role/2" do
+    test "redirects if user is not instructor", %{conn: conn, user: user} do
+      conn =
+        conn
+        |> assign(:current_user, user)
+        |> fetch_flash()
+        |> UserAuth.require_instructor_role([])
+
+      assert conn.halted
+      assert redirected_to(conn) == Routes.page_path(conn, :index)
+
+      assert get_flash(conn, :error) ==
+               "Você não tem permissões suficientes para acessar essa página."
+    end
+
+    test "does not redirect is user is instructor", %{conn: conn, user: user} do
+      conn =
+        conn
+        |> assign(:current_user, %{user | role: :instructor})
+        |> UserAuth.require_instructor_role([])
+
+      refute conn.halted
+      refute conn.status
+    end
+  end
+
+  describe "require_admin_role/2" do
+    test "redirects if user is not admin", %{conn: conn, user: user} do
+      conn =
+        conn
+        |> assign(:current_user, user)
+        |> fetch_flash()
+        |> UserAuth.require_admin_role([])
+
+      assert conn.halted
+      assert redirected_to(conn) == Routes.page_path(conn, :index)
+
+      assert get_flash(conn, :error) ==
+               "Você não tem permissões suficientes para acessar essa página."
+    end
+
+    test "does not redirect is user is admin", %{conn: conn, user: user} do
+      conn =
+        conn |> assign(:current_user, %{user | role: :admin}) |> UserAuth.require_admin_role([])
+
+      refute conn.halted
+      refute conn.status
+    end
+  end
+
+  describe "require_superadmin_role/2" do
+    test "redirects if user is not superadmin", %{conn: conn, user: user} do
+      conn =
+        conn
+        |> assign(:current_user, user)
+        |> fetch_flash()
+        |> UserAuth.require_superadmin_role([])
+
+      assert conn.halted
+      assert redirected_to(conn) == Routes.page_path(conn, :index)
+
+      assert get_flash(conn, :error) ==
+               "Você não tem permissões suficientes para acessar essa página."
+    end
+
+    test "does not redirect is user is superadmin", %{conn: conn, user: user} do
+      conn =
+        conn
+        |> assign(:current_user, %{user | role: :superadmin})
+        |> UserAuth.require_superadmin_role([])
+
+      refute conn.halted
+      refute conn.status
+    end
+  end
 end

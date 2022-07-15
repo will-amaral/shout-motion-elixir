@@ -92,6 +92,11 @@ defmodule ShoutMotion.AccountsTest do
       assert is_nil(user.confirmed_at)
       assert is_nil(user.password)
     end
+
+    test "registers users with a default student role" do
+      {:ok, user} = Accounts.register_user(valid_user_attributes())
+      assert user.role == :student
+    end
   end
 
   describe "change_user_registration/2" do
