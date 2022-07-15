@@ -510,4 +510,11 @@ defmodule ShoutMotion.AccountsTest do
       refute inspect(%User{password: "123456"}) =~ "password: \"123456\""
     end
   end
+
+  describe "valid tokens" do
+    test "tokens can't have non-alphabet characters" do
+      assert :error = UserToken.verify_email_token_query("foo!", "confirm")
+      assert :error = UserToken.verify_change_email_token_query("foo!", "change:")
+    end
+  end
 end
