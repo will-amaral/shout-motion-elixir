@@ -1,0 +1,9 @@
+{
+  "skip_files": [
+    "lib/shout_motion/application.ex",
+    "lib/shout_motion/release.ex",
+    "lib/shout_motion_web.ex",
+    "lib/shout_motion_web/router.ex",
+    "lib/shout_motion_web/telemetry.ex"
+  ]
+}
