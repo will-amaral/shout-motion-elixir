@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.4">
-    <meta name="project" content="ShoutMotion v1.3.1">
+    <meta name="project" content="ShoutMotion v1.4.0">
 
-    <title>ShoutMotionWeb.UserAuth — ShoutMotion v1.3.1</title>
+    <title>ShoutMotionWeb.UserAuth — ShoutMotion v1.4.0</title>
     <link rel="stylesheet" href="dist/elixir-b6f1ed5df9b1d42a7309.css" />
 
-    <script src="dist/sidebar_items-dc43172e55.js"></script>
+    <script src="dist/sidebar_items-2f2e410164.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 ShoutMotion
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v1.3.1
+        v1.4.0
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -99,7 +99,7 @@ ShoutMotion
 
 
   <span translate="no">ShoutMotionWeb.UserAuth</span> 
-  <small class="app-vsn" translate="no">(ShoutMotion v1.3.1)</small>
+  <small class="app-vsn" translate="no">(ShoutMotion v1.4.0)</small>
 
 </h1>
 
@@ -162,11 +162,43 @@ and remember me token.</p></div>
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#require_admin_role/2" translate="no">require_admin_role(conn, opts)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#require_authenticated_user/2" translate="no">require_authenticated_user(conn, opts)</a>
 
         </div>
 
           <div class="summary-synopsis"><p>Used for routes that require the user to be authenticated.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#require_instructor_role/2" translate="no">require_instructor_role(conn, opts)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#require_student_role/2" translate="no">require_student_role(conn, opts)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#require_superadmin_role/2" translate="no">require_superadmin_role(conn, opts)</a>
+
+        </div>
 
       </div>
 
@@ -260,6 +292,23 @@ if you are not using LiveView.</p>
 <p>Used for routes that require the user to not be authenticated.</p>
   </section>
 </section>
+<section class="detail" id="require_admin_role/2">
+
+  <div class="detail-header">
+    <a href="#require_admin_role/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">require_admin_role(conn, opts)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
 <section class="detail" id="require_authenticated_user/2">
 
   <div class="detail-header">
@@ -276,6 +325,57 @@ if you are not using LiveView.</p>
 
 <p>Used for routes that require the user to be authenticated.</p><p>If you want to enforce the user email is confirmed before
 they use the application at all, here would be a good place.</p>
+  </section>
+</section>
+<section class="detail" id="require_instructor_role/2">
+
+  <div class="detail-header">
+    <a href="#require_instructor_role/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">require_instructor_role(conn, opts)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="require_student_role/2">
+
+  <div class="detail-header">
+    <a href="#require_student_role/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">require_student_role(conn, opts)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="require_superadmin_role/2">
+
+  <div class="detail-header">
+    <a href="#require_superadmin_role/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">require_superadmin_role(conn, opts)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 
