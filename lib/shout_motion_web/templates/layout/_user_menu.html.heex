@@ -7,6 +7,16 @@
         </strong>
       </summary>
       <ul role="listbox">
+        <li>
+          <strong>
+            <%= case @current_user.role do
+              :student -> "Aluno"
+              :instructor -> "Instrutor"
+              :admin -> "Administrador"
+              _ -> @current_user.role
+            end %>
+          </strong>
+        </li>
         <li><%= link("Página Inicial", to: Routes.page_path(@conn, :index)) %></li>
         <li><%= link("Configurações", to: Routes.user_settings_path(@conn, :edit)) %></li>
         <li><a href="https://will-amaral.github.io/shout-motion" target="_blank">Ajuda</a></li>
