@@ -35,7 +35,7 @@ defmodule ShoutMotionWeb.UserRegistrationControllerTest do
       conn = get(conn, "/")
       response = html_response(conn, 200)
       assert response =~ email
-      assert response =~ "Configurações</a>"
+      assert response =~ "Configurações"
       assert response =~ "Sair</a>"
     end
 
