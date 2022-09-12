@@ -1,9 +1,9 @@
-<nav class="container-fluid">
+<nav class="container-fluid navigation">
   <ul>
     <li>
       <img style="max-height: 50px" src="/images/logo.png" alt="Logo" />
     </li>
-    <li>
+    <li class="desktop-only">
       <strong>
         <%= if @current_user do %>
           <%= link("ShoutMotion", to: Routes.page_path(@conn, :index), class: "contrast") %>
@@ -16,7 +16,7 @@
   <ul>
     <%= render("_user_menu.html", assigns) %>
     <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-      <li>
+      <li class="desktop-only">
         <%= link("LiveDashboard",
           to: Routes.live_dashboard_path(@conn, :home),
           class: "secondary"
@@ -25,6 +25,10 @@
     <% end %>
   </ul>
 </nav>
+
+<%= if @current_user do %>
+  <%= render("_sidebar.html", assigns) %>
+<% end %>
 
 <main class="container">
   <%= @inner_content %>

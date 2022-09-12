@@ -1,0 +1,12 @@
+<aside class="sidebar desktop-only">
+  <ul>
+    <%= for link <- get_paths(@current_user.role) do %>
+      <li class={active_link(@conn.path_info, link.to)}>
+        <a href={link.to}>
+          <ion-icon name={link.icon}></ion-icon>
+          <%= link.text %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</aside>
