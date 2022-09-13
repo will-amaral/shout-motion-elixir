@@ -34,6 +34,7 @@ defmodule ShoutMotionWeb.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     get "/", PageController, :index
+    resources "/financeiro/planos", PlanController
     get "/configuracoes", UserSettingsController, :edit
     put "/configuracoes", UserSettingsController, :update
     get "/configuracoes/confirmar-email/:token", UserSettingsController, :confirm_email

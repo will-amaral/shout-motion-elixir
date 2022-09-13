@@ -1,0 +1,28 @@
+<h1>Show Plan</h1>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @plan.title %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @plan.description %>
+  </li>
+
+  <li>
+    <strong>Price:</strong>
+    <%= @plan.price %>
+  </li>
+
+  <li>
+    <strong>Views:</strong>
+    <%= @plan.views %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.plan_path(@conn, :edit, @plan) %></span> |
+<span><%= link "Back", to: Routes.plan_path(@conn, :index) %></span>

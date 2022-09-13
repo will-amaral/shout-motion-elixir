@@ -57,7 +57,8 @@ defmodule ShoutMotionWeb.LayoutView do
   ]
 
   def active_link(path_info, path) do
-    if Path.join(["/" | path_info]) == path, do: "active"
+    [base_path | _] = path_info
+    if Path.join(["/" | [base_path]]) == path, do: "active"
   end
 
   def get_paths(role) do
