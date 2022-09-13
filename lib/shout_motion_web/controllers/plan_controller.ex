@@ -27,7 +27,11 @@ defmodule ShoutMotionWeb.PlanController do
   end
 
   def show(conn, %{"id" => id}) do
-    plan = Catalog.get_plan!(id)
+    plan =
+      id
+      |> Catalog.get_plan!()
+      |> Catalog.inc_page_views()
+
     render(conn, "show.html", plan: plan)
   end
 

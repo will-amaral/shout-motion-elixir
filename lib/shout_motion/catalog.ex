@@ -101,4 +101,12 @@ defmodule ShoutMotion.Catalog do
   def change_plan(%Plan{} = plan, attrs \\ %{}) do
     Plan.changeset(plan, attrs)
   end
+
+  def inc_page_views(%Plan{} = plan) do
+    {1, [%Plan{views: views}]} =
+      from(p in Plan, where: p.id == ^plan.id, select: [:views])
+      |> Repo.update_all(inc: [views: 1])
+
+    put_in(plan.views, views)
+  end
 end
