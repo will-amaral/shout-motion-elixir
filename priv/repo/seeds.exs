@@ -9,3 +9,6 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+for title <- ["Musculação", "Funcional", "Crossfit", "Natação"] do
+  {:ok, _} = ShoutMotion.Catalog.create_category(%{title: title})
+end

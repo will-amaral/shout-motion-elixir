@@ -1,32 +1,38 @@
-<h1>Listing Plans</h1>
+<h1>Planos disponíveis</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Views</th>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Preço</th>
+      <th>Visualizações</th>
 
       <th></th>
     </tr>
   </thead>
   <tbody>
-<%= for plan <- @plans do %>
-    <tr>
-      <td><%= plan.title %></td>
-      <td><%= plan.description %></td>
-      <td><%= plan.price %></td>
-      <td><%= plan.views %></td>
+    <%= for plan <- @plans do %>
+      <tr>
+        <td><%= plan.title %></td>
+        <td><%= plan.description %></td>
+        <td><%= plan.price %></td>
+        <td><%= plan.views %></td>
 
-      <td>
-        <span><%= link "Show", to: Routes.plan_path(@conn, :show, plan) %></span>
-        <span><%= link "Edit", to: Routes.plan_path(@conn, :edit, plan) %></span>
-        <span><%= link "Delete", to: Routes.plan_path(@conn, :delete, plan), method: :delete, data: [confirm: "Are you sure?"] %></span>
-      </td>
-    </tr>
-<% end %>
+        <td>
+          <span><%= link("Ver", to: Routes.plan_path(@conn, :show, plan)) %></span>
+          <span><%= link("Editar", to: Routes.plan_path(@conn, :edit, plan)) %></span>
+          <span>
+            <%= link("Excluir",
+              to: Routes.plan_path(@conn, :delete, plan),
+              method: :delete,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Plan", to: Routes.plan_path(@conn, :new) %></span>
+<span><%= link("Novo plano", to: Routes.plan_path(@conn, :new)) %></span>

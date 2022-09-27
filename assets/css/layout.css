@@ -160,3 +160,8 @@ body > footer {
     display: none;
   }
 }
+
+/* Multilevel list */
+li > ul > li {
+  list-style-type: disc;
+}

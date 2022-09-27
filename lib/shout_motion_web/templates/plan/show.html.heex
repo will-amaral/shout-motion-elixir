@@ -1,28 +1,37 @@
-<h1>Show Plan</h1>
+<h1>Detalhes do plano</h1>
 
 <ul>
-
   <li>
-    <strong>Title:</strong>
+    <strong>Nome:</strong>
     <%= @plan.title %>
   </li>
 
   <li>
-    <strong>Description:</strong>
+    <strong>Descrição:</strong>
     <%= @plan.description %>
   </li>
 
   <li>
-    <strong>Price:</strong>
+    <strong>Preço}:</strong>
     <%= @plan.price %>
   </li>
 
   <li>
-    <strong>Views:</strong>
+    <strong>Visualizações:</strong>
     <%= @plan.views %>
   </li>
 
+  <li>
+    <strong>Categorias:</strong>
+    <ul>
+      <%= for cat <- @plan.categories do %>
+        <li>
+          <%= cat.title %>
+        </li>
+      <% end %>
+    </ul>
+  </li>
 </ul>
 
-<span><%= link "Edit", to: Routes.plan_path(@conn, :edit, @plan) %></span> |
-<span><%= link "Back", to: Routes.plan_path(@conn, :index) %></span>
+<span><%= link("Edit", to: Routes.plan_path(@conn, :edit, @plan)) %></span> |
+<span><%= link("Back", to: Routes.plan_path(@conn, :index)) %></span>
