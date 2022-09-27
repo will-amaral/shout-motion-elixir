@@ -18,7 +18,7 @@ defmodule ShoutMotion.Catalog do
 
   """
   def list_plans do
-    Repo.all(Plan)
+    Plan |> Repo.all() |> Repo.preload(:categories)
   end
 
   @doc """
@@ -36,7 +36,7 @@ defmodule ShoutMotion.Catalog do
 
   """
   def get_plan!(id) do
-    Plan |> Repo.get(id) |> Repo.preload(:categories)
+    Plan |> Repo.get!(id) |> Repo.preload(:categories)
   end
 
   @doc """
@@ -116,6 +116,8 @@ defmodule ShoutMotion.Catalog do
 
     put_in(plan.views, views)
   end
+
+  def inc_page_views(_), do: nil
 
   alias ShoutMotion.Catalog.Category
 

@@ -12,7 +12,7 @@ defmodule ShoutMotion.CatalogFixtures do
       attrs
       |> Enum.into(%{
         description: "some description",
-        price: "120.5",
+        price: "120.500000",
         title: "some title",
         views: 42
       })

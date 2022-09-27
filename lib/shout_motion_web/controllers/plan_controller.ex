@@ -30,6 +30,7 @@ defmodule ShoutMotionWeb.PlanController do
     plan =
       id
       |> Catalog.get_plan!()
+      |> IO.inspect()
       |> Catalog.inc_page_views()
 
     render(conn, "show.html", plan: plan)
